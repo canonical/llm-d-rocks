@@ -1,5 +1,4 @@
 # Based on https://github.com/llm-d/llm-d-router/blob/v0.4.0/Dockerfile.sidecar
-# See ../CONTRIBUTING.md for more details about the patterns used in this rock.
 #
 # This rock builds the llm-d routing sidecar (pd-sidecar) binary. Unlike the
 # inference scheduler (epp), the sidecar is a plain Go build (CGO disabled) that
