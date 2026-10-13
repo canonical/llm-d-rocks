@@ -1,5 +1,4 @@
 # Based on https://github.com/llm-d/llm-d-router/blob/v0.4.0/Dockerfile.epp
-# See ../CONTRIBUTING.md for more details about the patterns used in this rock.
 #
 # This rock builds the llm-d "Endpoint Picker" (epp) inference scheduler binary.
 # Unlike a plain Go service, the upstream image is a CGO build that links
