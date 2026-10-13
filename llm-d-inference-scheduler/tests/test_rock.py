@@ -68,9 +68,11 @@ def test_epp_dynamic_libraries_resolve(rock_image):
 def test_epp_runs(rock_image):
     """The epp binary executes (loads its shared libs) and reports its usage."""
     # `epp --help` exercises binary startup without requiring a running model
-    # server. argparse-style runners exit non-zero on --help, so tolerate the
-    # exit code and assert on the absence of a dynamic-linker failure instead.
-    result = _run_in_rock(rock_image, "--help", override_entrypoint=False)
+    # server. Run it directly rather than through the Pebble entrypoint: when a
+    # service exits within Pebble's ~1s startup window, Pebble's shutdown races
+    # the pending start change and exits 1 with "cannot run daemon: context
+    # deadline exceeded", even though the service itself exited 0.
+    result = _run_in_rock(rock_image, "app/epp --help")
     output = result.stdout + result.stderr
     logger.info("epp --help output:\n%s", output)
     assert "error while loading shared libraries" not in output, output
